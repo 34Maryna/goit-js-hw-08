@@ -17,7 +17,10 @@ function onSubmit(evt) {
   evt.preventDefault();
   const currentValue = localStorage.getItem(STORAGE_KEY);
   const parseValue = JSON.parse(currentValue);
-  evt.currentTarget.reset();
+  if (refs.input.value === '') {
+    alert('Потрібно заповнити поле "Email"');
+  } 
+    evt.target.reset();
     localStorage.removeItem(STORAGE_KEY);
 }
 
@@ -29,11 +32,16 @@ function onForm(evt) {
 }
 
 function localStorageSetting() {
+  try {
   const currentValue = localStorage.getItem(STORAGE_KEY);
   const parseValue = JSON.parse(currentValue);
 
-  if (currentValue) {
+  if (!currentValue) {
+    return;
+  }
     refs.input.value = parseValue.email;
     refs.textarea.value = parseValue.message;
-  }
+  } catch (error) {
+    console.error('Error.message ', error.message);
+}
 }
