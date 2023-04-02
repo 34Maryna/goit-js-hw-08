@@ -17,8 +17,8 @@ function onSubmit(evt) {
   evt.preventDefault();
   const currentValue = localStorage.getItem(STORAGE_KEY);
   const parseValue = JSON.parse(currentValue);
-  if (refs.input.value === '') {
-    alert('Потрібно заповнити поле "Email"');
+  if (refs.input.value === '' || refs.textarea.value === '') {
+  return alert('Потрібно заповнити поле "Email"');
   } 
     evt.target.reset();
     localStorage.removeItem(STORAGE_KEY);
